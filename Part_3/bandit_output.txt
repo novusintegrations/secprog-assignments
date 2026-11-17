@@ -1,16 +1,11 @@
-[main]	INFO	profile include tests: None
-[main]	INFO	profile exclude tests: None
-[main]	INFO	cli include tests: None
-[main]	INFO	cli exclude tests: None
-[main]	INFO	running on Python 3.13.18
-Run started:2026-11-17 06:13:30.119920+00:00
+Run started:2026-11-17 08:53:44.555693+00:00
 
 Test results:
 >> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
    Severity: Low   Confidence: High
    CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
    More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess
-   Location: ./malicious_code.py:9:0
+   Location: Part_3\malicious_code.py:9:0
 8	import sqlite3
 9	import subprocess
 10	import pickle
@@ -20,7 +15,7 @@ Test results:
    Severity: Low   Confidence: High
    CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
    More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b403-import-pickle
-   Location: ./malicious_code.py:10:0
+   Location: Part_3\malicious_code.py:10:0
 9	import subprocess
 10	import pickle
 11	import hashlib
@@ -30,7 +25,7 @@ Test results:
    Severity: Low   Confidence: Medium
    CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
    More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
-   Location: ./malicious_code.py:16:14
+   Location: Part_3\malicious_code.py:16:14
 15	# 1) Hardcoded secrets (violates secrets management best practices)
 16	DB_PASSWORD = "Sup3rSecret!123"  # TODO: remove; use env var or secret store
 17	
@@ -40,7 +35,7 @@ Test results:
    Severity: Low   Confidence: High
    CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
    More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random
-   Location: ./malicious_code.py:21:15
+   Location: Part_3\malicious_code.py:21:15
 20	    # predictable & short-lived "token"
 21	    rand = str(random.randint(1000, 9999))  # insecure; not cryptographically strong
 22	    return f"{user_id}-{rand}-{int(time.time())}"
@@ -50,7 +45,7 @@ Test results:
    Severity: Medium   Confidence: Low
    CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
    More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html
-   Location: ./malicious_code.py:29:10
+   Location: Part_3\malicious_code.py:29:10
 28	    # Vulnerable: user-controlled 'email' concatenated into SQL
 29	    q = f"SELECT id, email, role FROM users WHERE email = '{email}';"
 30	    cur.execute(q)  # CWE-89
@@ -60,7 +55,7 @@ Test results:
    Severity: High   Confidence: High
    CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
    More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b602_subprocess_popen_with_shell_equals_true.html
-   Location: ./malicious_code.py:39:4
+   Location: Part_3\malicious_code.py:39:4
 38	    cmd = f"tar -czf backup.tar.gz {target_dir}"
 39	    subprocess.check_call(cmd, shell=True)  # CWE-78
 40	
@@ -70,7 +65,7 @@ Test results:
    Severity: Medium   Confidence: High
    CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
    More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b301-pickle
-   Location: ./malicious_code.py:45:15
+   Location: Part_3\malicious_code.py:45:15
 44	        # Vulnerable: executing attacker-controlled pickle payloads (RCE)
 45	        return pickle.load(fh)  # CWE-502
 46	
@@ -80,7 +75,7 @@ Test results:
    Severity: High   Confidence: High
    CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
    More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b324_hashlib.html
-   Location: ./malicious_code.py:50:13
+   Location: Part_3\malicious_code.py:50:13
 49	    # Vulnerable: MD5 is collision-prone and fast (bad for passwords)
 50	    hashed = hashlib.md5(pw.encode()).hexdigest()
 51	    conn = sqlite3.connect("users.db")
@@ -90,7 +85,7 @@ Test results:
    Severity: Medium   Confidence: High
    CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
    More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b307-eval
-   Location: ./malicious_code.py:62:11
+   Location: Part_3\malicious_code.py:62:11
 61	    # Vulnerable: arbitrary code execution
 62	    return eval(expr)  # CWE-94
 63	
